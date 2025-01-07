@@ -1,0 +1,14 @@
+header{
+width: 110%;
+height: 10%;
+left: 0px;
+top: 0px;
+background: linear-gradient(90deg, #A70202 0%, #762A2A 99.99%, #672525 100%);
+}
+.header-title{
+font-size: 48px;
+display: flex;
+align-items: center;
+text-align: center;
+color: #FFFFFF;
+}
