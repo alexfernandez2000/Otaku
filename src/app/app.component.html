@@ -1,7 +1,12 @@
 <main>
-  <header class="header-title">
-    <a [routerLink]="['']">Otaku</a>
-  </header>
+  <nav class="navbar">
+    <div class="navbar-title">
+      <a [routerLink]="['']">Otaku</a>
+    </div>
+    <div class="right-section">
+      <a [routerLink]="['About']">Sobre mi</a>
+    </div>
+  </nav>
   <section class="content">
       <router-outlet></router-outlet>
   </section>

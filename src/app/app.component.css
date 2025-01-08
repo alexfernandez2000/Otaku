@@ -1,14 +1,25 @@
-header{
-width: 110%;
-height: 10%;
-left: 0px;
-top: 0px;
-background: linear-gradient(90deg, #A70202 0%, #762A2A 99.99%, #672525 100%);
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #A70202 0%, #762A2A 99.99%, #672525 100%);
+    padding: 1rem;
+    font-size: 16px;
+    color: white;
+    margin: auto;
+    width: 100vw; /* Ocupa todo el ancho del viewport */
+    position: relative; /* No interfiere con otros elementos */
+    left: 0;
+  
 }
-.header-title{
-font-size: 48px;
-display: flex;
-align-items: center;
-text-align: center;
-color: #FFFFFF;
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-right: 1rem;
+  }
+.navbar-title{
+    font-size: 48px;
+}
+.right-section{
+    padding-right: 3rem;
 }
