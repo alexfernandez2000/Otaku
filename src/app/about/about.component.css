@@ -1,0 +1,17 @@
+.curriculum-image{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.curriculum{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-right: 20%;
+    margin-left: 20%;
+    color: hsl(213 31% 91%);
+    background-color: hsl(224 71% 4%);
+   
+}
+.curriculum a{
+    text-decoration: none;
+    color: inherit;
+}
