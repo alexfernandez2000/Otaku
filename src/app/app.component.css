@@ -5,15 +5,21 @@
     background: linear-gradient(90deg, #A70202 0%, #762A2A 99.99%, #672525 100%);
     padding: 1rem;
     font-size: 16px;
-    color: white;
+    color: black;
     margin: auto;
     width: 100vw; /* Ocupa todo el ancho del viewport */
     position: relative; /* No interfiere con otros elementos */
     left: 0;
   
 }
+.navbar-menu{
+    background-color: inherit;
+}
+.navbar-menu-button{
+    padding: 0px !important;
+}
 .navbar a {
-    color: white;
+    color: inherit;
     text-decoration: none;
     margin-right: 1rem;
   }
