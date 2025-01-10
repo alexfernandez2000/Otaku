@@ -1,1 +1,10 @@
-<p>minesweeper works!</p>
+<button class="btn" type="button" (click)="(startGame())">Start game</button>
+<table>
+    <div *ngFor="let row of minesweeperService.board; let i = index" class="row">
+        <!-- Recorre los botones de cada fila -->
+        <div *ngFor="let button of row" class="col">
+          <!-- Renderiza directamente el botón -->
+          <div [innerHTML]="sanitizeHtml(button.outerHTML)"></div>
+        </div>
+      </div>
+    </table>
