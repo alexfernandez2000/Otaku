@@ -1,0 +1,28 @@
+.contenedor {
+  display: inline-block; /* Permite que el cuadro se trate como un bloque en línea */
+  text-align: center; /* Centrar el contenido dentro del contenedor */
+  width: 100vw;
+  }
+  
+  /* Estilo para el cuadro */
+  .cuadro {
+    display: inline-block; /* Permite que el cuadro se trate como un bloque en línea */
+    color: white; /* Color del texto dentro del cuadro */
+    text-align: center; /* Centra el texto horizontalmente */
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+  }
+  
+  .grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    text-align: center;
+  }
+  .grid-item button{
+    width: 1.5vw;
+    height: 3vh;
+  }

@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MinesweeperService } from '../../services/minesweeper.service';
-import { DomSanitizer } from '@angular/platform-browser';
-
+import {Status} from '../models/cellmine';
 @Component({
   selector: 'app-minesweeper',
   imports: [CommonModule],
@@ -10,17 +9,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrl: './minesweeper.component.css'
 })
 export class MinesweeperComponent {
+  Status = Status;
 minesweeperService: MinesweeperService = inject(MinesweeperService);
-
-constructor(private sanitizer: DomSanitizer)
-{
-}
-
 startGame() {
   this.minesweeperService.initializeBoard();
-  }
-  sanitizeHtml(html: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
 }

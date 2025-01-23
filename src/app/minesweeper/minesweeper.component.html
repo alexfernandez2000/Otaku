@@ -1,10 +1,16 @@
-<button class="btn" type="button" (click)="(startGame())">Start game</button>
-<table>
-    <div *ngFor="let row of minesweeperService.board; let i = index" class="row">
-        <!-- Recorre los botones de cada fila -->
-        <div *ngFor="let button of row" class="col">
-          <!-- Renderiza directamente el botón -->
-          <div [innerHTML]="sanitizeHtml(button.outerHTML)"></div>
+<div class="contenedor">
+  <button class="btn" type="button" (click)="(startGame())">Start game</button>
+</div>
+<div class="contenedor">
+  <div class="cuadro">
+    <div class="grid-container">
+      <div *ngFor="let row of minesweeperService.board;">
+        <div class="grid-item" *ngFor="let cellMine of row">
+          <button *ngIf="cellMine.Status === Status.Bloqued" type="button"></button>
+          <button *ngIf="cellMine.Status === Status.Unloqued" type="button">{{cellMine.Value}}</button>
+          <button *ngIf="cellMine.Status === Status.Flag" type="button">F</button>  
         </div>
       </div>
-    </table>
+    </div>    
+  </div>
+</div>
