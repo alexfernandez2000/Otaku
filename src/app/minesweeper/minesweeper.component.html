@@ -5,7 +5,7 @@
   <div class="cuadro">
     <div class="grid-container">
       <div *ngFor="let row of minesweeperService.board;">
-        <div class="grid-item" *ngFor="let cellMine of row">
+        <div class="grid-item" (click)="click(cellMine)" *ngFor="let cellMine of row">
           <button *ngIf="cellMine.Status === Status.Bloqued" type="button"></button>
           <button *ngIf="cellMine.Status === Status.Unloqued" type="button">{{cellMine.Value}}</button>
           <button *ngIf="cellMine.Status === Status.Flag" type="button">F</button>  

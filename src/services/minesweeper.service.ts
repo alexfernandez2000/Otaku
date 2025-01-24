@@ -8,15 +8,63 @@ export class MinesweeperService
   mines: number = 10;
   board: CellMine[][]=[];
   boardSize: number=10;
-  async Click() {
+  private directions = [
+    [-1, -1], [-1, 0], [-1, 1], // Fila de arriba
+    [0, -1],          [0, 1],  // Misma fila, izquierda y derecha
+    [1, -1], [1, 0], [1, 1],   // Fila de abajo
+  ];
+
+  public async unlockCell(cellMine : CellMine) 
+  {
+    if(cellMine.Status !== Status.Bloqued)
+      return;
+    cellMine.Status = Status.Unloqued;
+    switch(cellMine.Value)
+    {
+      case 0://Empty
+        await this.unlockAround(cellMine);
+      break;
+      case -1://Bomb
+        break;
+    }
   }
-  async initializeBoard()
+
+  public async unlockAround(cellMine : CellMine)
+  {
+    const index = await this.findColRow(cellMine);
+    if(index == undefined)
+      return;
+    for(const [row,col] of this.directions)
+    {
+      const newRow = index?.row + row
+      const newCol= index?.col + col;
+      if
+      (
+        newRow >= 0 && newRow < this.board.length 
+        && newCol >= 0 && newCol < this.board[0].length
+      )
+        this.unlockCell(this.board[newRow][newCol]);
+    }
+  }
+
+  private async findColRow (cellMine : CellMine): Promise<{ row: number; col: number } | null> {
+    for (let row = 0; row < this.board.length; row++) {
+      const col = this.board[row].findIndex(cell => cell === cellMine);
+      if (col !== -1) {
+        return { row: row, col: col }; // Retorna las coordenadas
+      }
+    } 
+    return null; // Si no encuentra el objeto
+  }
+
+  public async initializeBoard()
   {
     this.board = [];
     await this.StartBoard();
     await this.PlaceBoombs();
     await this.SetNumber();
   }
+
   private async SetNumber()
   {
     for (let row = 0; row < this.board.length; row++) {
@@ -45,6 +93,7 @@ export class MinesweeperService
       console.log(i);
     }
   }
+
   private async StartBoard()
   {
     console.log("Entra start board");
@@ -58,49 +107,31 @@ export class MinesweeperService
       }  
     };
   }
-  private async ShowAdjacentCells() 
-  {
-    
-  }
-  private async ShowCell()
-  {
-
-  }
-
-  async ClickTest(edad: number): Promise<boolean> 
-  {
-    return await edad >= 18;
-  }
   private async CountBoombsArround(fila: number,columna: number): Promise<number> 
   {
       // Definimos las posibles direcciones (arriba, abajo, izquierda, derecha, diagonales)
-  const direcciones = [
-    [-1, -1], [-1, 0], [-1, 1], // Fila de arriba
-    [0, -1],          [0, 1],  // Misma fila, izquierda y derecha
-    [1, -1], [1, 0], [1, 1],   // Fila de abajo
-  ];
 
-  let contador = 0;
+    let contador = 0;
 
-  // Iteramos sobre todas las direcciones
-  for (const [row, col] of direcciones) {
-    const nuevaFila = fila + row;
-    const nuevaColumna = columna + col;
+    // Iteramos sobre todas las direcciones
+    for (const [row, col] of this.directions) {
+      const newRow = fila + row;
+      const newCol = columna + col;
 
-    // Comprobamos si la posición vecina está dentro de los límites de la matriz
-    if (
-      nuevaFila >= 0 &&
-      nuevaFila < this.board.length &&
-      nuevaColumna >= 0 &&
-      nuevaColumna < this.board[0].length
-    ) {
-      // Si el valor en la posición vecina es -1, aumentamos el contador
-      if (this.board[nuevaFila][nuevaColumna].Value === -1) {
-        contador++;
+      // Comprobamos si la posición vecina está dentro de los límites de la matriz
+      if (
+        newRow >= 0 &&
+        newRow < this.board.length &&
+        newCol >= 0 &&
+        newCol < this.board[0].length
+      ) {
+        // Si el valor en la posición vecina es -1, aumentamos el contador
+        if (this.board[newRow][newCol].Value === -1) {
+          contador++;
+        }
       }
     }
-  }
-  return contador;
+    return contador;
   }  
 }
 
