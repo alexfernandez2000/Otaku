@@ -10,10 +10,16 @@ import {CellMine, Status} from '../models/cellmine';
 })
 export class MinesweeperComponent 
 {
+showAround(cellMine : CellMine) {
+  this.minesweeperService.unlockAround(cellMine);
+}
+onRightClick(cellMine : CellMine) {
+  this.minesweeperService.insertFlag(cellMine);
+}
   Status = Status;
   click(cellMine: CellMine) 
   {
-    this.minesweeperService.ProcessCell(cellMine);
+    this.minesweeperService.unlockCell(cellMine);
   }
   minesweeperService: MinesweeperService = inject(MinesweeperService);
   startGame() 

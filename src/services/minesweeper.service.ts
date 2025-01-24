@@ -5,6 +5,7 @@ import { CellMine, Status } from '../app/models/cellmine';
 })
 export class MinesweeperService 
 {
+  //Victoria al desbloquear todas las casillas.
   mines: number = 10;
   board: CellMine[][]=[];
   boardSize: number=10;
@@ -13,7 +14,13 @@ export class MinesweeperService
     [0, -1],          [0, 1],  // Misma fila, izquierda y derecha
     [1, -1], [1, 0], [1, 1],   // Fila de abajo
   ];
-
+  public async insertFlag(cellMine : CellMine)
+  {
+    if(cellMine.Status === Status.Bloqued)
+      cellMine.Status = Status.Flag;
+    else if(cellMine.Status === Status.Flag)
+      cellMine.Status = Status.Bloqued;
+  }
   public async unlockCell(cellMine : CellMine) 
   {
     if(cellMine.Status !== Status.Bloqued)
