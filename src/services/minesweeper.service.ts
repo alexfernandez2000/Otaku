@@ -9,11 +9,13 @@ export class MinesweeperService
   mines: number = 10;
   board: CellMine[][]=[];
   boardSize: number=10;
+
   private directions = [
     [-1, -1], [-1, 0], [-1, 1], // Fila de arriba
     [0, -1],          [0, 1],  // Misma fila, izquierda y derecha
     [1, -1], [1, 0], [1, 1],   // Fila de abajo
   ];
+
   public async insertFlag(cellMine : CellMine)
   {
     if(cellMine.Status === Status.Bloqued)
@@ -32,8 +34,11 @@ export class MinesweeperService
         await this.unlockAround(cellMine);
       break;
       case -1://Bomb
-        break;
+        window.alert("GameOver");
+      break;
     }
+    if(await this.isWin())
+      window.alert("Win");
   }
 
   public async unlockAround(cellMine : CellMine)
@@ -67,12 +72,12 @@ export class MinesweeperService
   public async initializeBoard()
   {
     this.board = [];
-    await this.StartBoard();
-    await this.PlaceBoombs();
-    await this.SetNumber();
+    await this.startBoard();
+    await this.placeBoombs();
+    await this.setNumber();
   }
 
-  private async SetNumber()
+  private async setNumber()
   {
     for (let row = 0; row < this.board.length; row++) {
       for (let col = 0; col < this.board[row].length; col++) 
@@ -84,7 +89,7 @@ export class MinesweeperService
     }
   }
 
-  private async PlaceBoombs()
+  private async placeBoombs()
   {
     for (let i = 0; i < this.mines; i++) 
     {
@@ -101,7 +106,7 @@ export class MinesweeperService
     }
   }
 
-  private async StartBoard()
+  private async startBoard()
   {
     console.log("Entra start board");
     for (let row = 0; row < this.boardSize; row++) 
@@ -113,6 +118,22 @@ export class MinesweeperService
         this.board[row][col] = button;
       }  
     };
+  }
+  private async isWin() : Promise<Boolean>
+  {
+    for(let row = 0; row < this.boardSize; row++)
+    {
+      for(let col = 0; col < this.boardSize; col++)
+      {
+        const cellMine = this.board[row][col];
+
+        if(cellMine.Status === Status.Bloqued)
+          return false;
+        if(cellMine.Status === Status.Flag && cellMine.Value != -1)
+          return false;
+      }
+    }
+    return true;
   }
   private async CountBoombsArround(fila: number,columna: number): Promise<number> 
   {
