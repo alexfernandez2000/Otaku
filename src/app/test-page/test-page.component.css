@@ -1,0 +1,36 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 40px); /* 10 columnas */
+  gap: 2px;
+  background-color: #ccc;
+  padding: 10px;
+  border: 2px solid #333;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0e0e0;
+  border: 1px solid #999;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cell:hover {
+  background-color: #d3d3d3;
+}
+
+.cell.mine {
+  background-color: #ff4c4c; /* Color rojo para minas */
+  color: white;
+}
+.contenedor {
+    display: inline-block; /* Permite que el cuadro se trate como un bloque en línea */
+    text-align: center; /* Centrar el contenido dentro del contenedor */
+    width: 100vw;
+    }
