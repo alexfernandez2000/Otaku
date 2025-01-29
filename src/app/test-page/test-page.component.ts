@@ -1,20 +1,24 @@
-import { Component, inject } from '@angular/core';
-import { MinesweeperService } from '../../services/minesweeper.service';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CellMine, Status } from '../models/cellmine';
+import { TimerComponent } from '../timer/timer.component';
 
 @Component({
   selector: 'app-test-page',
-  imports: [CommonModule],
+  imports: [CommonModule, TimerComponent],
   templateUrl: './test-page.component.html',
   styleUrl: './test-page.component.css'
 })
 export class TestPageComponent {
-    minesweeperService: MinesweeperService = inject(MinesweeperService);
-  
-  startGame() {
-    this.minesweeperService.initializeBoard();
+  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
 
-  }
+restart() {
+  this.timerComponent.resetTimer();
+}
+stop() {
+  this.timerComponent.stopTimer();
+}
+start() {
+this.timerComponent.startTimer();
+}
 
 }

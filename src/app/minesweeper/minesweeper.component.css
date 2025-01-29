@@ -24,4 +24,8 @@
   .grid-item button{
     width: 40px;
     height: 40px;
+    color: black;
+  }
+  .unloqued-button{
+    background-color: gray;
   }

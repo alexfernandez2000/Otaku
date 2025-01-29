@@ -1,17 +1,6 @@
-<button type="button" (click)="startGame()">Start Game</button>
-<div class="contenedor">
-    <div class="board">
-        <div
-          *ngFor="let row of minesweeperService.board;"
-          class="row"
-        >
-          <div
-            *ngFor="let cell of row;"
-            class="cell">
-            
-            {{ cell.Value}}
-          </div>
-        </div>
-      </div>
-      
+<div class="cronometro">
+<app-timer></app-timer>
+<button (click)="start()">Iniciar</button>
+<button (click)="stop()">Parar</button>
+<button (click)="restart()">Reiniciar</button>
 </div>

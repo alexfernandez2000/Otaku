@@ -8,7 +8,7 @@ export class MinesweeperService {
   mines: number = 10;
   board: CellMine[][] = [];
   boardSize: number = 10;
-
+  activeGame : boolean = false;
   private directions = [
     [-1, -1], [-1, 0], [-1, 1], // Fila de arriba
     [0, -1], [0, 1],  // Misma fila, izquierda y derecha
@@ -33,6 +33,7 @@ export class MinesweeperService {
         break;
       case -1://Bomb
         window.alert("GameOver");
+        this.activeGame=false;
         break;
     }
     this.checkWin();
@@ -57,10 +58,14 @@ export class MinesweeperService {
     await this.startBoard();
     await this.placeBoombs();
     await this.setNumber();
+    this.activeGame=true;
   }
   private async checkWin() {
     if (await this.isWin())
+    {
       window.alert("Win");
+      this.activeGame=false;
+    }
   }
 
   private async findColRow(cellMine: CellMine): Promise<{ row: number; col: number } | null> {
