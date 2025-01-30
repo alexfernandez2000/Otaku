@@ -1,15 +1,17 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MinesweeperService } from '../../services/minesweeper.service';
 import { CellMine, Status } from '../models/cellmine';
+import { TimerComponent } from '../timer/timer.component';
 @Component({
   selector: 'app-minesweeper',
-  imports: [CommonModule],
+  imports: [CommonModule,TimerComponent],
   templateUrl: './minesweeper.component.html',
   styleUrl: './minesweeper.component.css'
 })
 export class MinesweeperComponent {
   minesweeperService: MinesweeperService = inject(MinesweeperService);
+  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
   Status = Status;
 
   showAround(cellMine: CellMine) {
@@ -19,15 +21,15 @@ export class MinesweeperComponent {
     event.preventDefault();
     if(this.minesweeperService.activeGame)
       this.minesweeperService.insertFlag(cellMine);
-    console.log(this.minesweeperService.activeGame)
   }
 
-  click(cellMine: CellMine) {
-    this.minesweeperService.unlockCell(cellMine);
+ async click(cellMine: CellMine) {
+   await this.minesweeperService.unlockCell(cellMine);
   }
 
-  startGame() {
-    this.minesweeperService.initializeBoard();
+  async startGame() {
+    await this.minesweeperService.initializeBoard();
+    await this.timerComponent.startTimer();
   }
 
 }

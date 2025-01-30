@@ -9,6 +9,7 @@ export class MinesweeperService {
   board: CellMine[][] = [];
   boardSize: number = 10;
   activeGame : boolean = false;
+  
   private directions = [
     [-1, -1], [-1, 0], [-1, 1], // Fila de arriba
     [0, -1], [0, 1],  // Misma fila, izquierda y derecha
