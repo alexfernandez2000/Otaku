@@ -7,11 +7,11 @@
     <div class="grid-container" >
       <div *ngFor="let row of minesweeperService.board;">
         <div class="grid-item" *ngFor="let cellMine of row">
-          <button [disabled]="!minesweeperService.activeGame" *ngIf="cellMine.Status === Status.Bloqued" (click)="click(cellMine)" (contextmenu)="onRightClick($event,cellMine)" type="button" ></button>
-          <button [disabled]="!minesweeperService.activeGame" *ngIf="cellMine.Status === Status.Flag" (contextmenu)="onRightClick($event,cellMine)" type="button">F</button>  
-          <button [disabled]="!minesweeperService.activeGame" *ngIf="cellMine.Status === Status.Unloqued && cellMine.Value === 0" type="button" class="btn active unloqued-button"></button>
-          <button [disabled]="!minesweeperService.activeGame" *ngIf="cellMine.Status === Status.Unloqued && cellMine.Value === -1" type="button" class="btn active unloqued-button">💣</button>
-          <button [disabled]="!minesweeperService.activeGame" *ngIf="cellMine.Status === Status.Unloqued && cellMine.Value > 0" (click)="showAround(cellMine)"  type="button" class="btn active unloqued-button">{{cellMine.Value}}</button>
+          <button  *ngIf="cellMine.Status === Status.Bloqued" (click)="click(cellMine)" (contextmenu)="onRightClick($event,cellMine)" type="button" ></button>
+          <button  *ngIf="cellMine.Status === Status.Flag" (contextmenu)="onRightClick($event,cellMine)" type="button">F</button>  
+          <button  *ngIf="cellMine.Status === Status.Unloqued && cellMine.Value === 0" type="button" class="btn active unloqued-button"></button>
+          <button  *ngIf="cellMine.Status === Status.Unloqued && cellMine.Value === -1" type="button" class="btn active unloqued-button">💣</button>
+          <button  *ngIf="cellMine.Status === Status.Unloqued && cellMine.Value > 0" (click)="showAround(cellMine)"  type="button" class="btn active unloqued-button">{{cellMine.Value}}</button>
         </div>
       </div>
     </div>    

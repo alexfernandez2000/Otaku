@@ -13,13 +13,13 @@ export class MinesweeperComponent {
   minesweeperService: MinesweeperService = inject(MinesweeperService);
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
   Status = Status;
-
+  disableRightClick : boolean = false;
   showAround(cellMine: CellMine) {
     this.minesweeperService.unlockAround(cellMine);
   }
   onRightClick(event: MouseEvent, cellMine: CellMine): void {
     event.preventDefault();
-    if(this.minesweeperService.activeGame)
+    if(!this.disableRightClick)
       this.minesweeperService.insertFlag(cellMine);
   }
 
@@ -28,8 +28,37 @@ export class MinesweeperComponent {
   }
 
   async startGame() {
-    await this.minesweeperService.initializeBoard();
+    await this.minesweeperService.startGame();
+    this.minesweeperService.onWin = async () => await this.winAction();
+    this.minesweeperService.onGameOver = async () => await this.gameOverAction();
+    await this.timerComponent.resetTimer();
     await this.timerComponent.startTimer();
+    this.disableRightClick=false;
   }
-
+  async winAction()
+  {
+   await this.timerComponent.stopTimer();
+    alert("you win");
+  }
+  async gameOverAction()
+  {
+    alert("you lose");
+    await this.timerComponent.stopTimer();
+    await this.disableButtons();
+  }
+  
+  private async disableButtons()
+  {
+    const botones = document.querySelectorAll('button');
+    const divs = document.querySelectorAll('div.grid-item');
+    divs.forEach(div =>{
+      const buttons = div.querySelectorAll('button');
+      buttons.forEach(button=>
+        {
+          if(button instanceof HTMLButtonElement)
+            button.disabled=true;    
+        })
+    });
+    this.disableRightClick=true;
+  }
 }
