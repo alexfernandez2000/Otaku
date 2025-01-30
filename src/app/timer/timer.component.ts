@@ -1,28 +1,42 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-timer',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.css'
 })
 export class TimerComponent {
-time : Date = new Date(0);
+  hours: number = 0;
+  minutes : number = 0;
+  seconds : number = 0;
 private intervalId : NodeJS.Timeout|undefined;
   async startTimer() 
   {
-    console.log("Entra timer");
-    //Every second add one secont to the timer
-    this.intervalId = setInterval(()=>{
-        this.time.setSeconds(this.time.getSeconds())
+    if(this.intervalId == undefined)
+      this.intervalId = setInterval(()=>{
+        this.seconds++
+        if(this.seconds>=60)
+        {
+          this.seconds=0;
+          this.minutes++;
+          if(this.minutes>=60)
+          {
+            this.minutes=0;
+            this.hours++;
+          }
+        }
     }, 1000)
   }
   async stopTimer() 
   {
     clearInterval(this.intervalId);
+    this.intervalId = undefined;
   }
   async resetTimer()
   {
-    this.time=new Date(0);
+    this.hours=0;
+    this.minutes=0;
+    this.seconds=0;
   }
 }

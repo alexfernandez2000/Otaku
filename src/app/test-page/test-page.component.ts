@@ -11,14 +11,14 @@ import { TimerComponent } from '../timer/timer.component';
 export class TestPageComponent {
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
 
-restart() {
-  this.timerComponent.resetTimer();
+async restart() {
+ await this.timerComponent.resetTimer();
 }
-stop() {
-  this.timerComponent.stopTimer();
+async stop() {
+ await this.timerComponent.stopTimer();
 }
-start() {
-this.timerComponent.startTimer();
+async start() {
+await this.timerComponent.startTimer();
 }
 
 }
