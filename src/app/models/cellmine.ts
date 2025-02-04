@@ -1,14 +1,19 @@
 export class CellMine {
-    Status : Status;
-    Value : number;
-
-    constructor(status : Status, value: number) {     
-        this.Status=status;
-        this.Value=value;
+    status: Status;
+    minesAround: number;
+    isBomb: boolean = false; // Prefijo "is" para booleanos
+    isDisabled: boolean = false;
+    row: number;
+    col: number;
+      constructor(status : Status, minesAround: number,row: number, col: number) {     
+        this.status=status;
+        this.minesAround=minesAround;
+        this.row=row;
+        this.col=col;
     }
 }
 export enum Status{
-    Bloqued,
+    Blocked,
     Unloqued,
     Flag
 }
