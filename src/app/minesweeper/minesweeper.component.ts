@@ -1,8 +1,9 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, Inject, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BoardService } from '../core/services/minesweeper/board.service';
 import { CellMine, Status } from '../models/cellmine';
 import { TimerComponent } from '../timer/timer.component';
+import { MINESWEEPER_BOARD_SERVICE_TOKEN } from '../app.tokens';
+import { IBoardService } from '../core/services/minesweeper/interfaces/board.service.interface';
 @Component({
   selector: 'app-minesweeper',
   imports: [CommonModule,TimerComponent],
@@ -10,9 +11,11 @@ import { TimerComponent } from '../timer/timer.component';
   styleUrl: './minesweeper.component.css'
 })
 export class MinesweeperComponent {
-  minesweeperService: BoardService = inject(BoardService);
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
   Status = Status;
+  constructor(@Inject(MINESWEEPER_BOARD_SERVICE_TOKEN) private minesweeperBoard : IBoardService)
+  {}
+
   showAround(cellMine: CellMine) {
     this.minesweeperService.unlockAround(cellMine);
   }

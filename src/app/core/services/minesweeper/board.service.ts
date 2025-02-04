@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CellMine, Status } from '../../../models/cellmine';
-import { Subject } from 'rxjs';
 import {isValidPosition} from '../../tools/boardTools'
 @Injectable({
   providedIn: 'root'
@@ -67,8 +66,6 @@ export class BoardService {
       this.board[rowRandomValue][colRandomValue].minesAround = -1;
     }
   }
-
-
   //#endregion
 }
 

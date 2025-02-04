@@ -5,7 +5,7 @@
 <div class="contenedor">
   <div class="cuadro">
     <div class="grid-container" >
-      <div *ngFor="let row of minesweeperService.board;">
+      <div *ngFor="let row of minse;">
         <div class="grid-item" *ngFor="let cellMine of row">
           <button [disabled]="cellMine.isDisabled" *ngIf="cellMine.status === Status.Blocked" (click)="click(cellMine)" (contextmenu)="onRightClick($event,cellMine)" type="button" ></button>
           <button [disabled]="cellMine.isDisabled" *ngIf="cellMine.status === Status.Flag" (contextmenu)="onRightClick($event,cellMine)" type="button">F</button>  

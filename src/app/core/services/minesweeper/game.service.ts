@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CellMine, Status } from '../../../models/cellmine';
-import { IBoardService } from '../../interfaces/minesweeper/IBoardService';
+import { IBoardService } from './interfaces/board.service.interface';
 import { Subject } from 'rxjs';
 import { isValidPosition,DIRECTIONS } from '../../tools/boardTools';
-import { IGameService } from '../../interfaces/minesweeper/IGameService';
+import { IGameService } from './interfaces/game.service.interface';
 @Injectable({
   providedIn: 'root'
 })
