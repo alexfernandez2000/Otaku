@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { CellMine, Status } from '../../../models/cellmine';
-import { IBoardService } from './interfaces/board.service.interface';
 import { Subject } from 'rxjs';
-import { isValidPosition,DIRECTIONS } from '../../tools/boardTools';
+import { isValidPosition,DIRECTIONS } from '../../tools/board.tool';
+import { MINESWEEPER_BOARD_SERVICE_TOKEN} from '../../../app.tokens';
 import { IGameService } from './interfaces/game.service.interface';
+import { IBoardService } from './interfaces/board.service.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,7 @@ export class GameService implements IGameService{
   onGameOver$ = new Subject<void>();
   onWin$ = new Subject<void>();
 
-  constructor(private boardService: IBoardService) { }
+  constructor(@Inject(MINESWEEPER_BOARD_SERVICE_TOKEN) private boardService: IBoardService) { }
   
   public insertFlag(cellMine: CellMine) {
     if (cellMine.status === Status.Blocked) {
@@ -43,7 +44,7 @@ export class GameService implements IGameService{
       const newRow = cellMine?.row + row
       const newCol = cellMine?.col + col;
       if(isValidPosition(newRow,newCol,board))
-      this.revealCell(board[newRow][newCol]);
+        this.revealCell(board[newRow][newCol]);
     }
   }
   private checkWin() {

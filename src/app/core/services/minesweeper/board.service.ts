@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
 import { CellMine, Status } from '../../../models/cellmine';
-import {isValidPosition} from '../../tools/boardTools'
+import {DIRECTIONS, isValidPosition} from '../../tools/board.tool'
+import { IBoardService } from './interfaces/board.service.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class BoardService {
-  mines: number = 10;
-  board: CellMine[][] = [];
-  boardSize: number = 10;
-  //Possible cell directions around a single cell.
-  private directions = [
-    [-1, -1], [-1, 0], [-1, 1], // Upper row
-    [0, -1], [0, 1],  // Same row, left and right
-    [1, -1], [1, 0], [1, 1],   // Lower row
-  ];
-  //#region Board initialization
-  public async startGame() {
+export class BoardService implements IBoardService {
+  private board: CellMine[][] = [];
+  private boardSize: number = 10;
+  public getBoard(): CellMine[][]
+  {
+    return this.board;
+  }
+  public async initializeBoard(size: number, mines: number) {
+
     this.startBoard();
-    this.placeBombs();
+    this.placeBombs(mines);
     this.setNumber();
   }
   private startBoard() {
@@ -43,7 +41,7 @@ export class BoardService {
     let bombCount = 0;
 
     // Iterate all posible directions from a single cell
-    for (const [rowDirection, colDirection] of this.directions) {
+    for (const [rowDirection, colDirection] of DIRECTIONS) {
       const newRow = cellMine.row + rowDirection;
       const newCol = cellMine.col + colDirection;
 
@@ -54,8 +52,8 @@ export class BoardService {
     }
     return bombCount;
   }
-  private placeBombs() {
-    for (let i = 0; i < this.mines; i++) {
+  private placeBombs(mines : number) {
+    for (let i = 0; i < mines; i++) {
       let colRandomValue: number = Math.floor(Math.random() * this.boardSize);
       let rowRandomValue: number = Math.floor(Math.random() * this.boardSize);
       let cell: CellMine = this.board[colRandomValue][rowRandomValue];
@@ -66,6 +64,5 @@ export class BoardService {
       this.board[rowRandomValue][colRandomValue].minesAround = -1;
     }
   }
-  //#endregion
 }
 
