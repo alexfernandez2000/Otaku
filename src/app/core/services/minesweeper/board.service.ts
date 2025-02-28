@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CellMine, Status } from '../../../models/cellmine';
+import { CellMine, Status } from './models/cellmine';
 import {DIRECTIONS, isValidPosition} from '../../tools/board.tool'
 import { IBoardService } from './interfaces/board.service.interface';
 @Injectable({
@@ -47,7 +47,7 @@ export class BoardService implements IBoardService {
 
       // Check if the neighbors cells is valid
       if (isValidPosition(newRow, newCol,this.board))
-        if (this.board[newRow][newCol].minesAround === -1)
+        if (this.board[newRow][newCol].isBomb)
           bombCount++;
     }
     return bombCount;
@@ -57,11 +57,11 @@ export class BoardService implements IBoardService {
       let colRandomValue: number = Math.floor(Math.random() * this.boardSize);
       let rowRandomValue: number = Math.floor(Math.random() * this.boardSize);
       let cell: CellMine = this.board[colRandomValue][rowRandomValue];
-      if (cell.minesAround === -1) {
+      if (cell.isBomb) {
         i--;
         continue;
       }
-      this.board[rowRandomValue][colRandomValue].minesAround = -1;
+      this.board[rowRandomValue][colRandomValue].isBomb = true;
     }
   }
 }

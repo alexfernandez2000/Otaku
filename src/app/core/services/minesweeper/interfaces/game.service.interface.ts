@@ -1,5 +1,5 @@
 import { Subject } from "rxjs";
-import { CellMine } from "../../../../models/cellmine";
+import { CellMine } from "../models/cellmine";
 
 export interface IGameService {
     onWin$: Subject<void>;

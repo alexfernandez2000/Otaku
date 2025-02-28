@@ -9,9 +9,9 @@
         <div class="grid-item" *ngFor="let cellMine of row">
           <button [disabled]="cellMine.isDisabled" *ngIf="cellMine.status === Status.Blocked" (click)="click(cellMine)" (contextmenu)="onRightClick($event,cellMine)" type="button" ></button>
           <button [disabled]="cellMine.isDisabled" *ngIf="cellMine.status === Status.Flag" (contextmenu)="onRightClick($event,cellMine)" type="button">F</button>  
-          <button [disabled]="cellMine.isDisabled" *ngIf="cellMine.status === Status.Unloqued && cellMine.minesAround === 0" type="button" class="btn active unloqued-button"></button>
-          <button [disabled]="cellMine.isDisabled" *ngIf="cellMine.status === Status.Unloqued && cellMine.minesAround === -1" type="button" class="btn active unloqued-button">💣</button>
-          <button [disabled]="cellMine.isDisabled" *ngIf="cellMine.status === Status.Unloqued && cellMine.minesAround > 0" (click)="showAround(cellMine)"  type="button" class="btn active unloqued-button">{{cellMine.minesAround}}</button>
+          <button [disabled]="cellMine.isDisabled" *ngIf="cellMine.status === Status.Unloqued && !cellMine.isBomb && cellMine.minesAround === 0" type="button" class="btn active unloqued-button"></button>
+          <button [disabled]="cellMine.isDisabled" *ngIf="cellMine.status === Status.Unloqued && !cellMine.isBomb && cellMine.minesAround > 0" (click)="showAround(cellMine)"  type="button" class="btn active unloqued-button">{{cellMine.minesAround}}</button>
+          <button [disabled]="cellMine.isDisabled" *ngIf="cellMine.status === Status.Unloqued && cellMine.isBomb" type="button" class="btn active unloqued-button">💣</button>
         </div>
       </div>
     </div>    

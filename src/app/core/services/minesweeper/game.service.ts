@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { CellMine, Status } from '../../../models/cellmine';
+import { CellMine, Status } from './models/cellmine';
 import { Subject } from 'rxjs';
 import { isValidPosition,DIRECTIONS } from '../../tools/board.tool';
 import { MINESWEEPER_BOARD_SERVICE_TOKEN} from '../../../app.tokens';
@@ -25,17 +25,15 @@ export class GameService implements IGameService{
   public revealCell(cellMine: CellMine) {
     if (cellMine.status !== Status.Blocked)
       return;
-
     cellMine.status = Status.Unloqued;
-
-    switch (cellMine.minesAround) {
-      case 0://Empty
-        this.unlockAround(cellMine);
-        break;
-      case -1://Bomb
-          this.onGameOver$?.next(); 
-        break;
-    }
+    if(cellMine.isBomb)
+      {
+        this.onGameOver$?.next(); 
+        this.removeSuscription
+        return;
+      }
+    else if(cellMine.minesAround===0)
+      this.unlockAround(cellMine);      
     this.checkWin();
   }
   public unlockAround(cellMine: CellMine) {
@@ -49,7 +47,17 @@ export class GameService implements IGameService{
   }
   private checkWin() {
     if (this.isWin())
-      this.onWin$.next();
+    {
+      this.onWin$?.next();
+      this.removeSuscription();
+    }
+  }
+  private removeSuscription()
+  {
+    console.log("unsus");
+    this.onWin$?.unsubscribe();
+    this.onGameOver$?.unsubscribe();
+
   }
   private isWin(): Boolean {
     const board = this.boardService.getBoard();
@@ -57,7 +65,7 @@ export class GameService implements IGameService{
       for (const cellMine of row) {
         if (cellMine.status === Status.Blocked)
           return false;
-        if (cellMine.status === Status.Flag && cellMine.minesAround != -1)
+        if (cellMine.status === Status.Flag && !cellMine.isBomb)
           return false;
       }
     }

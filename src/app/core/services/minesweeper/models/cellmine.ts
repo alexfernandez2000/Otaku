@@ -1,7 +1,7 @@
 export class CellMine {
     status: Status;
     minesAround: number;
-    isBomb: boolean = false; // Prefijo "is" para booleanos
+    isBomb: boolean = false;
     isDisabled: boolean = false;
     row: number;
     col: number;
