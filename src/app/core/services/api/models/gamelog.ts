@@ -6,8 +6,8 @@ export class GameLog{
     fkIdGame: number;
     fkIdGameNavigation?: Game;
   
-    constructor(id: number, playedTime: string, fkIdGame: number, fkIdGameNavigation?: Game) {
-      this.id = id;
+    constructor( playedTime: string, fkIdGame: number, fkIdGameNavigation?: Game,id?: number) {
+      this.id = id ?? 0;
       this.playedTime = playedTime;
       this.fkIdGame = fkIdGame;
       this.fkIdGameNavigation = fkIdGameNavigation;

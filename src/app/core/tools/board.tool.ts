@@ -6,4 +6,6 @@
   export function isValidPosition(row: number, col: number, board: any[][]): boolean {
     return row >= 0 && row < board.length && col >= 0 && col < board[0].length;
   }
-  
+  export enum GameId{
+    Minesweeper = 1
+  }

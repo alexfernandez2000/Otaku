@@ -1,7 +1,12 @@
 import { Observable } from "rxjs";
 import { IGenericApi } from "./interfaces/generic.api.interface";
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
+@Injectable({
+    providedIn: 'root' 
+  })
+  
 export abstract class GenericApi<T> implements IGenericApi<T>
 {
     abstract apiUrl: string;
@@ -11,6 +16,7 @@ export abstract class GenericApi<T> implements IGenericApi<T>
         return this.http.get<T[]>(this.apiUrl);
     }
     add(object: T): Observable<T> {
+        console.log("Entra add api url:",this.apiUrl);
         return this.http.post<T>(this.apiUrl,object);
     }
     update(object: T): Observable<void> {

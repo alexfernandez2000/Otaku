@@ -7,10 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './timer.component.css'
 })
 export class TimerComponent {
-  hours: number = 0;
-  minutes : number = 0;
-  seconds : number = 0;
-private intervalId : NodeJS.Timeout|undefined;
+   hours: number = 0;
+   minutes : number = 0;
+   seconds : number = 0;
+  private intervalId : NodeJS.Timeout|undefined;
   async startTimer() 
   {
     if(this.intervalId == undefined)
@@ -38,5 +38,9 @@ private intervalId : NodeJS.Timeout|undefined;
     this.hours=0;
     this.minutes=0;
     this.seconds=0;
+  }
+  getTime():string
+  {
+    return `${this.hours}:${this.minutes}:${this.seconds}`;
   }
 }
