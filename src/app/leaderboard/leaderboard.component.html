@@ -1,4 +1,6 @@
-
+<select (change)="filerByGame($event)">
+    <option *ngFor="let game of games" [value]="game.id">{{game.name}}</option>
+</select>
 <table class="leaderboard-list-table">
     <thead>
         <tr>

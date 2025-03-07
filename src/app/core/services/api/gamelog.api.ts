@@ -16,6 +16,8 @@ export class GameLogApi extends GenericApi<GameLog> implements IGameLogApi {
     getAllWithGame(): Observable<GameLog[]> {
             return this.http.get<GameLog[]>(`${this.apiUrl}/GetAllWithGame`);
     }
-    
+    getByGameId(gameId:number): Observable<GameLog[]>{
+        return this.http.get<GameLog[]>(`${this.apiUrl}/GetByGameIdAsync/${gameId}`);
+    }
 
 }
