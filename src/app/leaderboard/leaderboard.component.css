@@ -1,0 +1,19 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+  }
+  .leaderboard-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .leaderboard-list-table th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .leaderboard-list-table button {
+    margin-right: 5px;
+  }

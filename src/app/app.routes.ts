@@ -4,6 +4,7 @@ import { AboutComponent } from './about/about.component';
 import { MinesweeperComponent } from './minesweeper/minesweeper.component';
 import { TestPageComponent } from './test-page/test-page.component';
 import { TimerComponent } from './timer/timer.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 export const routes: Routes = [
     {
@@ -30,5 +31,10 @@ export const routes: Routes = [
         path: 'Timer',
         component: TimerComponent,
         title: 'Timer'
+    },
+    {
+        path: 'Leaderboard',
+        component: LeaderboardComponent,
+        title: 'Leaderboard'
     }
 ];

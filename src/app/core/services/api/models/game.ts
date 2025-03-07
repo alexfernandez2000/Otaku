@@ -3,12 +3,10 @@ import { GameLog } from "./gamelog";
 export class Game{
     id: number;
     name: string;
-    gameLogs: GameLog[];
   
-    constructor(id: number, name: string, gameLogs: GameLog[] = []) {
-      this.id = id;
+    constructor(name: string, id?: number) {
+      this.id = id ?? 0;
       this.name = name;
-      this.gameLogs = gameLogs;
     }
   
 }

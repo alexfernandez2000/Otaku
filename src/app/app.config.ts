@@ -4,14 +4,14 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { API_GAMELOG_TOCKEN } from './app.tokens';
 import { GameLogApi } from './core/services/api/gamelog.api';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
     { provide: API_GAMELOG_TOCKEN, useClass: GameLogApi }
     ]
 };

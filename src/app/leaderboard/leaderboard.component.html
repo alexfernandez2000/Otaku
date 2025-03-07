@@ -1,0 +1,17 @@
+
+<table class="leaderboard-list-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Time</th>
+            <th>Game</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let gameLog of gameLogs">
+            <td>{{gameLog.id}}</td>
+            <td>{{gameLog.playedTime}}</td>
+            <td>{{gameLog.fkIdGame}}</td>
+        </tr>
+    </tbody>
+</table>

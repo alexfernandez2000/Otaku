@@ -46,7 +46,6 @@ export class MinesweeperComponent {
   }
 
   async startGame() {
-    this.gameLogService.registerGameLog("00:00:10",GameId.Minesweeper);
     this.minesweeperBoard.initializeBoard(10,10);
     this.minesweeperGame.onWin$.pipe(take(1)).subscribe(()=>this.winAction());
     this.minesweeperGame.onGameOver$.pipe(take(1)).subscribe(() =>this.gameOverAction());
@@ -57,6 +56,7 @@ export class MinesweeperComponent {
   async winAction()
   {
     await this.timerComponent.stopTimer();
+    console.log(this.timerComponent.getTime());
     this.gameLogService.registerGameLog(this.timerComponent.getTime(),GameId.Minesweeper);
     alert("you win");
   }

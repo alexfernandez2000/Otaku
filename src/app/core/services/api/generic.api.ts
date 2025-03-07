@@ -10,13 +10,14 @@ import { Injectable } from "@angular/core";
 export abstract class GenericApi<T> implements IGenericApi<T>
 {
     abstract apiUrl: string;
-    constructor(private http: HttpClient)
+    constructor(protected http: HttpClient)
     {}
     getAll(): Observable<T[]> {
         return this.http.get<T[]>(this.apiUrl);
     }
     add(object: T): Observable<T> {
         console.log("Entra add api url:",this.apiUrl);
+        console.log(object);
         return this.http.post<T>(this.apiUrl,object);
     }
     update(object: T): Observable<void> {

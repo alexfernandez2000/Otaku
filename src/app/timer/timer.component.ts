@@ -41,6 +41,6 @@ export class TimerComponent {
   }
   getTime():string
   {
-    return `${this.hours}:${this.minutes}:${this.seconds}`;
+    return `${this.hours>9 ? this.hours : `0${this.hours}`}:${this.minutes>9 ? this.minutes : `0${this.minutes}`}:${this.seconds>9 ? this.seconds : `0${this.seconds}`}`;
   }
 }
